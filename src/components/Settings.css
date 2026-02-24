@@ -1,0 +1,25 @@
+/* 설정 대화형 레이아웃 (메인과 동일한 VN 스타일) */
+
+.ds-settings-vn .ds-mascot-conversation--vn {
+  max-width: 420px;
+}
+
+.ds-settings-step-field {
+  margin-top: var(--ds-space-3);
+  margin-bottom: var(--ds-space-2);
+}
+
+.ds-settings-step-field label + * {
+  margin-top: var(--ds-space-1);
+}
+
+/* 전체 설정 화면: 상단에 "대화로 채우기" 버튼 */
+.ds-settings-full {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-4);
+}
+
+.ds-settings-full-actions {
+  margin-bottom: var(--ds-space-2);
+}
