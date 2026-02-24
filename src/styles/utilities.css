@@ -27,17 +27,21 @@
 
 /* Type utilities — refined display/headline (DS Refined) */
 .ds-type-display {
+  font-family: var(--ds-font-display);
   font-size: var(--ds-type-display-size);
   line-height: var(--ds-type-display-line);
   font-weight: var(--ds-type-display-weight);
   letter-spacing: -0.02em;
 }
 .ds-type-title-lg {
+  font-family: var(--ds-font-display);
   font-size: var(--ds-type-title-lg-size);
   line-height: var(--ds-type-title-lg-line);
   font-weight: var(--ds-type-title-lg-weight);
+  letter-spacing: -0.01em;
 }
 .ds-type-title {
+  font-family: var(--ds-font-display);
   font-size: var(--ds-type-title-size);
   line-height: var(--ds-type-title-line);
   font-weight: var(--ds-type-title-weight);
