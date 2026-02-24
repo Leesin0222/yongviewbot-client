@@ -1,0 +1,23 @@
+/* Mascot speech bubble — cute radius, soft shadow (DS §2.1, §2.2) */
+.ds-mascot-bubble {
+  padding: var(--ds-space-3) var(--ds-space-4);
+  background: var(--ds-color-bg-elevated);
+  border: 1px solid var(--ds-color-border);
+  border-radius: var(--ds-radius-bubble);
+  box-shadow: var(--ds-shadow-surface);
+  font-size: var(--ds-type-body-size);
+  line-height: var(--ds-type-body-line);
+  color: var(--ds-color-text);
+  max-width: 360px;
+}
+
+.ds-mascot-bubble.ds-mascot-bubble--error {
+  background: var(--ds-color-error-bg);
+  border-color: var(--ds-color-error-fg);
+  color: var(--ds-color-text);
+}
+
+.ds-mascot-bubble.ds-mascot-bubble--success {
+  background: var(--ds-color-success-bg);
+  border-color: var(--ds-color-success-fg);
+}

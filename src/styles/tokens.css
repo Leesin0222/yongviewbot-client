@@ -1,0 +1,141 @@
+/**
+ * Design system tokens — CSS custom properties.
+ * Light theme values as default. Dark overrides in theme.css.
+ */
+
+:root {
+  /* ---- Color: Primary ---- */
+  --ds-color-primary-50: #E8F4FC;
+  --ds-color-primary-100: #B8DCF5;
+  --ds-color-primary-200: #7AB8E8;
+  --ds-color-primary-500: #0A7ACA;
+  --ds-color-primary-600: #0665A1;
+  --ds-color-primary-700: #044D7A;
+
+  /* ---- Color: Neutral ---- */
+  --ds-color-neutral-0: #FFFFFF;
+  --ds-color-neutral-50: #F5F6F8;
+  --ds-color-neutral-100: #EBEDF0;
+  --ds-color-neutral-200: #DDE0E4;
+  --ds-color-neutral-300: #C5CAD1;
+  --ds-color-neutral-400: #9CA3AF;
+  --ds-color-neutral-500: #6B7280;
+  --ds-color-neutral-600: #4B5563;
+  --ds-color-neutral-900: #111827;
+
+  /* ---- Color: Semantic ---- */
+  --ds-color-success-bg: #ECFDF5;
+  --ds-color-success-fg: #059669;
+  --ds-color-warning-bg: #FFFBEB;
+  --ds-color-warning-fg: #D97706;
+  --ds-color-error-bg: #FEF2F2;
+  --ds-color-error-fg: #DC2626;
+  --ds-color-info-bg: #EFF6FF;
+  --ds-color-info-fg: #2563EB;
+
+  /* ---- Color: Background layers ---- */
+  --ds-color-bg-app: var(--ds-color-neutral-0);
+  --ds-color-bg-panel: var(--ds-color-neutral-50);
+  --ds-color-bg-elevated: var(--ds-color-neutral-100);
+  --ds-color-bg-input: var(--ds-color-neutral-0);
+  --ds-color-border: var(--ds-color-neutral-200);
+  --ds-color-border-hover: var(--ds-color-neutral-300);
+  --ds-color-text: var(--ds-color-neutral-900);
+  --ds-color-text-secondary: var(--ds-color-neutral-500);
+  --ds-color-text-placeholder: var(--ds-color-neutral-400);
+
+  /* ---- Spacing (4px base) ---- */
+  --ds-space-0: 0;
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+
+  /* ---- Typography: Font families ---- */
+  --ds-font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --ds-font-mono: "Consolas", "Monaco", "Menlo", monospace;
+
+  /* ---- Typography: Scale ---- */
+  --ds-type-display-size: 24px;
+  --ds-type-display-line: 1.25;
+  --ds-type-display-weight: 600;
+
+  --ds-type-title-lg-size: 18px;
+  --ds-type-title-lg-line: 1.35;
+  --ds-type-title-lg-weight: 600;
+
+  --ds-type-title-size: 16px;
+  --ds-type-title-line: 1.4;
+  --ds-type-title-weight: 600;
+
+  --ds-type-body-lg-size: 15px;
+  --ds-type-body-lg-line: 1.45;
+  --ds-type-body-lg-weight: 400;
+
+  --ds-type-body-size: 14px;
+  --ds-type-body-line: 1.5;
+  --ds-type-body-weight: 400;
+
+  --ds-type-body-sm-size: 13px;
+  --ds-type-body-sm-line: 1.45;
+  --ds-type-body-sm-weight: 400;
+
+  --ds-type-caption-size: 12px;
+  --ds-type-caption-line: 1.4;
+  --ds-type-caption-weight: 400;
+
+  --ds-type-label-size: 12px;
+  --ds-type-label-line: 1.3;
+  --ds-type-label-weight: 500;
+
+  --ds-type-mono-size: 13px;
+  --ds-type-mono-line: 1.5;
+  --ds-type-mono-weight: 400;
+
+  /* ---- Elevation ---- */
+  --ds-shadow-surface: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --ds-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --ds-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --ds-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --ds-shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* ---- Component tokens ---- */
+  --ds-button-height-sm: 32px;
+  --ds-button-height-md: 36px;
+  --ds-button-height-lg: 40px;
+  --ds-button-padding-x-sm: 12px;
+  --ds-button-padding-x-md: 16px;
+  --ds-button-padding-x-lg: 20px;
+  --ds-button-radius: 8px;
+  --ds-radius-bubble: 14px;
+  --ds-mascot-size: 160px;
+
+  --ds-input-height: 36px;
+  --ds-input-padding-x: 12px;
+  --ds-input-padding-y: 8px;
+  --ds-input-border-width: 1px;
+  --ds-input-radius: 8px;
+
+  --ds-focus-ring: 0 0 0 2px var(--ds-color-neutral-0), 0 0 0 4px var(--ds-color-primary-500);
+  --ds-focus-ring-offset: 2px;
+
+  /* ---- Iconography (DS §4.1) ---- */
+  --ds-icon-sm: 16px;
+  --ds-icon-md: 20px;
+  --ds-icon-lg: 24px;
+
+  /* ---- Semantic extended (danger button hover/active) ---- */
+  --ds-color-error-hover: #B91C1C;
+  --ds-color-error-active: #991B1B;
+
+  /* ---- Motion ---- */
+  --ds-duration-instant: 80ms;
+  --ds-duration-micro: 120ms;
+  --ds-duration-short: 200ms;
+  --ds-duration-medium: 300ms;
+  --ds-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}

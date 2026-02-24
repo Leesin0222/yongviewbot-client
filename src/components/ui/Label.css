@@ -1,0 +1,13 @@
+.ds-label {
+  display: block;
+  font-size: var(--ds-type-label-size);
+  line-height: var(--ds-type-label-line);
+  font-weight: var(--ds-type-label-weight);
+  color: var(--ds-color-text);
+  margin-bottom: var(--ds-space-1);
+}
+
+.ds-label__required {
+  color: var(--ds-color-error-fg);
+  margin-left: 2px;
+}

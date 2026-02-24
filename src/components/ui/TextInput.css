@@ -1,0 +1,73 @@
+.ds-text-input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-1);
+}
+
+.ds-text-input-wrap .ds-text-input-error-msg,
+.ds-text-input-wrap .ds-text-input-hint {
+  margin-top: var(--ds-space-1);
+}
+
+.ds-text-input {
+  width: 100%;
+  min-height: var(--ds-input-height);
+  padding: var(--ds-input-padding-y) var(--ds-input-padding-x);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-type-body-size);
+  line-height: var(--ds-type-body-line);
+  color: var(--ds-color-text);
+  background: var(--ds-color-bg-input);
+  border: var(--ds-input-border-width) solid var(--ds-color-border);
+  border-radius: var(--ds-input-radius);
+  transition: border-color var(--ds-duration-micro) var(--ds-ease),
+    box-shadow var(--ds-duration-instant) var(--ds-ease),
+    background-color var(--ds-duration-micro) var(--ds-ease);
+}
+
+.ds-text-input::placeholder {
+  color: var(--ds-color-text-placeholder);
+}
+
+.ds-text-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--ds-color-border-hover);
+}
+
+.ds-text-input:focus {
+  outline: none;
+  border-color: var(--ds-color-primary-500);
+  box-shadow: var(--ds-shadow-sm), 0 0 0 1px var(--ds-color-primary-500);
+}
+
+.ds-text-input:disabled {
+  background: var(--ds-color-bg-elevated);
+  color: var(--ds-color-text-placeholder);
+  cursor: not-allowed;
+}
+
+.ds-text-input--error {
+  border-color: var(--ds-color-error-fg);
+}
+
+.ds-text-input--error:focus {
+  border-color: var(--ds-color-error-fg);
+  box-shadow: var(--ds-shadow-sm), 0 0 0 1px var(--ds-color-error-fg);
+}
+
+.ds-text-input--mono {
+  font-family: var(--ds-font-mono);
+  font-size: var(--ds-type-mono-size);
+}
+
+.ds-text-input-hint {
+  font-size: var(--ds-type-caption-size);
+  line-height: var(--ds-type-caption-line);
+  color: var(--ds-color-text-secondary);
+}
+
+/* Inline validation: ds-body-sm + semantic color (DS §11 Form layout) */
+.ds-text-input-error-msg {
+  font-size: var(--ds-type-body-sm-size);
+  line-height: var(--ds-type-body-sm-line);
+  color: var(--ds-color-error-fg);
+}

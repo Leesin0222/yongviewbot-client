@@ -1,0 +1,41 @@
+/**
+ * Theme overrides. Default is light (from tokens.css).
+ * Apply dark theme with: document.documentElement.setAttribute('data-theme', 'dark')
+ */
+
+[data-theme="dark"] {
+  --ds-color-primary-50: #0D2840;
+  --ds-color-primary-100: #163A5C;
+  --ds-color-primary-200: #1E4A75;
+  --ds-color-primary-500: #3B9AE8;
+  --ds-color-primary-600: #5BB0F5;
+  --ds-color-primary-700: #7EC8F8;
+
+  --ds-color-neutral-0: #0F1114;
+  --ds-color-neutral-50: #181B20;
+  --ds-color-neutral-100: #22262C;
+  --ds-color-neutral-200: #2E333A;
+  --ds-color-neutral-300: #3D444D;
+  --ds-color-neutral-400: #6B7280;
+  --ds-color-neutral-500: #9CA3AF;
+  --ds-color-neutral-600: #D1D5DB;
+  --ds-color-neutral-900: #F9FAFB;
+
+  --ds-color-success-bg: #064E3B;
+  --ds-color-success-fg: #34D399;
+  --ds-color-warning-bg: #78350F;
+  --ds-color-warning-fg: #FBBF24;
+  --ds-color-error-bg: #7F1D1D;
+  --ds-color-error-fg: #F87171;
+  --ds-color-info-bg: #1E3A8A;
+  --ds-color-info-fg: #60A5FA;
+
+  --ds-shadow-surface: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --ds-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ds-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --ds-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --ds-shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.45);
+
+  --ds-color-error-hover: #F87171;
+  --ds-color-error-active: #FCA5A5;
+}

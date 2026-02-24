@@ -1,0 +1,125 @@
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-space-2);
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-type-body-size);
+  font-weight: 500;
+  line-height: var(--ds-type-body-line);
+  border: 1px solid transparent;
+  border-radius: var(--ds-button-radius);
+  cursor: pointer;
+  transition: background-color var(--ds-duration-micro) var(--ds-ease),
+    border-color var(--ds-duration-micro) var(--ds-ease),
+    box-shadow var(--ds-duration-instant) var(--ds-ease),
+    transform var(--ds-duration-instant) var(--ds-ease);
+}
+
+.ds-btn:focus {
+  outline: none;
+}
+
+.ds-btn:focus-visible {
+  box-shadow: var(--ds-focus-ring);
+}
+
+.ds-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Sizes */
+.ds-btn--sm {
+  min-height: var(--ds-button-height-sm);
+  padding: 0 var(--ds-button-padding-x-sm);
+}
+
+.ds-btn--md {
+  min-height: var(--ds-button-height-md);
+  padding: 0 var(--ds-button-padding-x-md);
+}
+
+.ds-btn--lg {
+  min-height: var(--ds-button-height-lg);
+  padding: 0 var(--ds-button-padding-x-lg);
+}
+
+/* Primary — refined: subtle depth + active feedback (DS §7) */
+.ds-btn--primary {
+  background: var(--ds-color-primary-500);
+  color: var(--ds-color-neutral-0);
+  border-color: var(--ds-color-primary-500);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.ds-btn--primary:hover:not(:disabled) {
+  background: var(--ds-color-primary-600);
+  border-color: var(--ds-color-primary-600);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.ds-btn--primary:active:not(:disabled) {
+  background: var(--ds-color-primary-700);
+  border-color: var(--ds-color-primary-700);
+  box-shadow: 0 0 0 transparent;
+  transform: scale(0.98);
+}
+
+/* Secondary */
+.ds-btn--secondary {
+  background: var(--ds-color-bg-elevated);
+  color: var(--ds-color-text);
+  border-color: var(--ds-color-border);
+}
+
+.ds-btn--secondary:hover:not(:disabled) {
+  background: var(--ds-color-neutral-200);
+  border-color: var(--ds-color-border-hover);
+}
+
+.ds-btn--secondary:active:not(:disabled) {
+  background: var(--ds-color-neutral-300);
+  transform: scale(0.98);
+}
+
+/* Ghost */
+.ds-btn--ghost {
+  background: transparent;
+  color: var(--ds-color-text);
+  border-color: transparent;
+}
+
+.ds-btn--ghost:hover:not(:disabled) {
+  background: var(--ds-color-neutral-50);
+}
+
+.ds-btn--ghost:active:not(:disabled) {
+  background: var(--ds-color-neutral-100);
+  transform: scale(0.98);
+}
+
+/* Danger */
+.ds-btn--danger {
+  background: var(--ds-color-error-fg);
+  color: var(--ds-color-neutral-0);
+  border-color: var(--ds-color-error-fg);
+}
+
+.ds-btn--danger:hover:not(:disabled) {
+  background: var(--ds-color-error-hover);
+  border-color: var(--ds-color-error-hover);
+}
+
+.ds-btn--danger:active:not(:disabled) {
+  background: var(--ds-color-error-active);
+  border-color: var(--ds-color-error-active);
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-btn:active:not(:disabled) {
+    transform: none;
+  }
+}

@@ -1,0 +1,86 @@
+/* DS §7 Toast: bottom-right, stack, min-width 320px */
+.ds-toast-container {
+  position: fixed;
+  bottom: var(--ds-space-6);
+  right: var(--ds-space-6);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.ds-toast {
+  pointer-events: auto;
+  min-width: 320px;
+  max-width: 420px;
+  padding: var(--ds-space-4);
+  background: var(--ds-color-bg-elevated);
+  border: 1px solid var(--ds-color-border);
+  border-left: 4px solid var(--ds-color-neutral-200);
+  border-radius: var(--ds-button-radius);
+  box-shadow: var(--ds-shadow-lg);
+  font-size: var(--ds-type-body-size);
+  line-height: var(--ds-type-body-line);
+  color: var(--ds-color-text);
+  animation: ds-toast-in var(--ds-duration-short) var(--ds-ease) forwards;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+}
+.ds-toast__message { flex: 1; }
+.ds-toast__close {
+  flex-shrink: 0;
+  width: var(--ds-icon-sm);
+  height: var(--ds-icon-sm);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ds-color-text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: background-color var(--ds-duration-micro) var(--ds-ease),
+    color var(--ds-duration-micro) var(--ds-ease);
+}
+.ds-toast__close:hover {
+  color: var(--ds-color-text);
+  background: var(--ds-color-neutral-200);
+}
+.ds-toast__close:focus { outline: none; }
+.ds-toast__close:focus-visible { box-shadow: var(--ds-focus-ring); }
+
+.ds-toast--success {
+  border-left-color: var(--ds-color-success-fg);
+}
+
+.ds-toast--error {
+  border-left-color: var(--ds-color-error-fg);
+}
+
+.ds-toast--warning {
+  border-left-color: var(--ds-color-warning-fg);
+}
+
+@keyframes ds-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-toast {
+    animation: none;
+  }
+}
