@@ -40,11 +40,7 @@ export default function App() {
       </header>
       <main className="ds-app-main" id="main-content" role="main">
         <TabPanel id="panel-main" value={TAB_MAIN} activeValue={view}>
-          <MainScreen
-          botRunning={botRunning}
-          botError={botError}
-          onOpenSettings={() => setView(TAB_SETTINGS)}
-        />
+          <MainScreen botRunning={botRunning} botError={botError} />
         </TabPanel>
         <TabPanel id="panel-settings" value={TAB_SETTINGS} activeValue={view}>
           <Settings />

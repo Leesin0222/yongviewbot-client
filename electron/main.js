@@ -51,8 +51,10 @@ function getJarPath() {
     const jarPath = path.join(process.resourcesPath, 'yongviewbot.jar')
     return fs.existsSync(jarPath) ? jarPath : null
   }
-  const jarPath = path.join(__dirname, '..', 'resources', 'yongviewbot.jar')
-  return fs.existsSync(jarPath) ? jarPath : null
+  const libs = path.join(app.getAppPath(), '..', 'yongviewbot', 'build', 'libs')
+  if (!fs.existsSync(libs)) return null
+  const files = fs.readdirSync(libs).filter(f => f.startsWith('yongviewbot-') && f.endsWith('.jar'))
+  return files.length ? path.join(libs, files[0]) : null
 }
 
 function getLocalIp() {

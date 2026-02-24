@@ -6,9 +6,9 @@
 import { useState } from 'react'
 import './Mascot.css'
 
-const DEFAULT_IMAGE_SRC = '/mascot.png'
+const DEFAULT_MASCOT_SRC = '/mascot.png'
 
-export default function Mascot({ src = DEFAULT_IMAGE_SRC, alt = '' }) {
+export default function Mascot({ src = DEFAULT_MASCOT_SRC, alt = '' }) {
   const [errored, setErrored] = useState(false)
   const showPlaceholder = errored
 
@@ -23,7 +23,7 @@ export default function Mascot({ src = DEFAULT_IMAGE_SRC, alt = '' }) {
         />
       )}
       {showPlaceholder && (
-        <div className="ds-mascot__placeholder ds-mascot__placeholder--visible" aria-hidden="true">
+        <div className="ds-mascot__placeholder" aria-hidden="true">
           마스코트
         </div>
       )}

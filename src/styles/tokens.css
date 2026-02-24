@@ -56,8 +56,7 @@
   --ds-space-10: 40px;
 
   /* ---- Typography: Font families ---- */
-  --ds-font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --ds-font-display: "Outfit", var(--ds-font-sans);
+  --ds-font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
   --ds-font-mono: "Consolas", "Monaco", "Menlo", monospace;
 
   /* ---- Typography: Scale ---- */
