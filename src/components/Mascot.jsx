@@ -6,7 +6,7 @@
 import { useState } from 'react'
 import './Mascot.css'
 
-const DEFAULT_IMAGE_SRC = '/mascot.png'
+const DEFAULT_IMAGE_SRC = import.meta.env.BASE_URL + 'mascot.png'
 
 export default function Mascot({ src = DEFAULT_IMAGE_SRC, alt = '' }) {
   const [errored, setErrored] = useState(false)
