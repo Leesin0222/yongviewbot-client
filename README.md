@@ -22,7 +22,8 @@ yongviewbot 봇 서버를 **설정만으로 실행/종료**할 수 있는 데스
    ```
 
 2. **봇 JAR 내장**  
-   빌드된 봇 JAR를 **`resources/yongviewbot.jar`** 에 넣어 두세요. 개발·배포 모두 이 경로만 사용합니다.
+   빌드된 **`yongviewbot.jar`** 를 **`resources/yongviewbot.jar`** 에 직접 넣어 두세요.  
+   (yongviewbot을 형제 폴더에 두고 빌드했다면 `npm run copy-jar`로 복사해도 됩니다.)
 
 3. **Electron 앱 실행 (개발 모드)**
    ```bash
@@ -47,27 +48,34 @@ yongviewbot 봇 서버를 **설정만으로 실행/종료**할 수 있는 데스
 봇은 **앱 안에 내장**합니다. `resources/yongviewbot.jar` 에 JAR 파일을 두면 개발·패키징 모두 이 파일을 사용합니다.
 
 1. **JAR 넣기**  
-   빌드된 `yongviewbot-*.jar` 를 **`resources/yongviewbot.jar`** 로 복사해 두세요.  
-   (봇 소스가 형제 폴더에 있으면 `npm run copy-jar` 로 복사할 수 있습니다.)
+   빌드된 **`yongviewbot-*.jar`** 를 **`resources/yongviewbot.jar`** 로 복사해 두세요.  
+   (형제 폴더에 yongviewbot이 있으면 `npm run copy-jar`로 복사 가능.)
 
 2. **Electron 앱 빌드**
    ```bash
    npm run electron:build
    ```
-   결과물은 `release/` 폴더에 생성됩니다.
+   결과물은 `release/` 폴더에 생성됩니다.  
+   - **Windows**: NSIS 설치 파일 + portable  
+   - **macOS**: 맥에서 빌드 시 `dmg`, `zip` 생성
 
 3. **사용자 요구 사항**  
    설치한 PC에는 **Java 17 이상**이 설치되어 있어야 봇이 실행됩니다.  
    Ollama는 사용자가 별도로 설치·실행해 두어야 합니다.
 
+4. **설치 프로그램 커스텀**  
+   설치 파일 아이콘, 라이선스 화면, DMG 배경 등은 [docs/INSTALLER_CUSTOMIZATION.md](docs/INSTALLER_CUSTOMIZATION.md) 참고. `build/` 폴더에 리소스를 넣고 옵션을 설정하면 됩니다.
+
 ## 폴더 구조
 
 ```
 yongviewbot-client/
+├── build/             # 설치 프로그램 리소스 (아이콘, 라이선스, DMG 배경 등, 선택)
 ├── electron/          # main process, preload
 ├── src/               # React (메인, 설정)
 ├── resources/         # yongviewbot.jar 내장 (이 폴더에 JAR 넣기)
 ├── scripts/           # 유틸 스크립트
+├── docs/              # DESIGN_SYSTEM, INSTALLER_CUSTOMIZATION 등
 ├── package.json
 └── README.md
 ```
