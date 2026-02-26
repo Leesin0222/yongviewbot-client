@@ -15,7 +15,7 @@ const defaultConfig = {
   webhookSecret: '',
   ollamaBaseUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.1:8b',
-  reviewMode: 'single',
+  reviewTriggerActions: 'open',
   serverPort: '8000',
 }
 
@@ -237,7 +237,7 @@ ipcMain.handle('startBot', () => {
     WEBHOOK_SECRET: config.webhookSecret || '',
     OLLAMA_BASE_URL: config.ollamaBaseUrl || 'http://localhost:11434',
     OLLAMA_MODEL: config.ollamaModel || 'llama3.1:8b',
-    REVIEW_MODE: config.reviewMode || 'single',
+    REVIEW_TRIGGER_ACTIONS: config.reviewTriggerActions ?? 'open',
     SERVER_PORT: config.serverPort || '8000',
   }
   try {

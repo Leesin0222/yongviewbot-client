@@ -12,7 +12,7 @@ const defaultConfig = {
   webhookSecret: '',
   ollamaBaseUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.1:8b',
-  reviewMode: 'single',
+  reviewTriggerActions: 'open',
   serverPort: '8000',
 }
 
@@ -22,7 +22,7 @@ const SETTINGS_STEPS = [
   { id: 'webhookSecret', message: 'Webhook Secret 쓸 거면 알려줘. 안 쓰면 건너뛰어도 돼. 삐-뷰.', key: 'webhookSecret', label: 'Webhook Secret (선택)', required: false, type: 'text', canSkip: true },
   { id: 'ollamaUrl', message: 'Ollama 주소 알려줘. 기본은 http://localhost:11434 삐-뷰.', key: 'ollamaBaseUrl', label: 'Ollama Base URL', required: false, type: 'text' },
   { id: 'ollamaModel', message: 'Ollama 모델 이름 알려줘. 예: llama3.1:8b 삐-뷰.', key: 'ollamaModel', label: 'Ollama Model', required: false, type: 'text', placeholder: 'llama3.1:8b' },
-  { id: 'reviewMode', message: '리뷰 모드는? single이면 MR 노트 한 개, line이면 라인별 스레드. 삐-뷰.', key: 'reviewMode', label: 'Review Mode', required: false, type: 'select', options: [{ value: 'single', label: 'single (MR 노트 한 개)' }, { value: 'line', label: 'line (라인별 스레드)' }] },
+  { id: 'reviewTriggerActions', message: '리뷰 트리거 알려줘. open이면 MR 최초 오픈 시만, open,update,reopen이면 오픈·수정·다시 열기 시. 삐-뷰.', key: 'reviewTriggerActions', label: '리뷰 트리거 (action)', required: false, type: 'text', placeholder: 'open 또는 open,update,reopen' },
   { id: 'serverPort', message: '봇이 받을 포트 번호 알려줘. 기본 8000 삐-뷰.', key: 'serverPort', label: 'Server Port', required: false, type: 'text' },
   { id: 'theme', message: '밝게 할까? 어둡게 할까? 삐-뷰.', key: 'theme', label: '테마', required: false, type: 'theme' },
 ]
@@ -329,10 +329,7 @@ export default function Settings() {
         <section aria-labelledby="settings-server-heading">
           <h2 id="settings-server-heading" className="ds-section-title">서버</h2>
           <div className="ds-flex ds-flex-col ds-gap-3">
-            <Select id="review-mode" label="Review Mode" value={config.reviewMode} onChange={(e) => setConfig((p) => ({ ...p, reviewMode: e.target.value }))}>
-              <option value="single">single (MR 노트 한 개)</option>
-              <option value="line">line (라인별 스레드)</option>
-            </Select>
+            <TextInput id="review-trigger-actions" label="리뷰 트리거 (MR 웹훅 action)" value={config.reviewTriggerActions} onChange={(e) => setConfig((p) => ({ ...p, reviewTriggerActions: e.target.value }))} placeholder="open 또는 open,update,reopen" />
             <TextInput id="server-port" label="Server Port" value={config.serverPort} onChange={(e) => setConfig((p) => ({ ...p, serverPort: e.target.value }))} />
           </div>
         </section>
