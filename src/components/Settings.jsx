@@ -114,7 +114,8 @@ export default function Settings() {
   const handleChooseFull = () => setMode('full')
 
   const handleNext = () => {
-    if (stepIndex < SETTINGS_STEPS.length) setStepIndex((i) => i + 1)
+    const steps = getConversationSteps(config)
+    if (stepIndex < steps.length) setStepIndex((i) => i + 1)
     setTypingDone(false)
   }
 
