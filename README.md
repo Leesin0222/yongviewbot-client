@@ -52,12 +52,12 @@ yongviewbot 봇 서버를 **설정만으로 실행/종료**할 수 있는 데스
    (형제 폴더에 yongviewbot이 있으면 `npm run copy-jar`로 복사 가능.)
 
 2. **Electron 앱 빌드**
-   ```bash
-   npm run electron:build
-   ```
-   결과물은 `release/` 폴더에 생성됩니다.  
-   - **Windows**: NSIS 설치 파일 + portable  
-   - **macOS**: 맥에서 빌드 시 `dmg`, `zip` 생성
+   - **현재 OS만**: `npm run electron:build`  
+     결과물은 `release/` 폴더에 생성됩니다.  
+     - **Windows**: NSIS 설치 파일 + portable  
+     - **macOS**: 맥에서 빌드 시 `dmg`, `zip` 생성  
+   - **Windows·macOS 둘 다**: `npm run electron:build:all`  
+     한 번에 Windows용과 macOS용 설치 파일을 모두 만듭니다. (다만 macOS용은 macOS에서 빌드하는 것이 권장됩니다.)
 
 3. **사용자 요구 사항**  
    설치한 PC에는 **Java 17 이상**이 설치되어 있어야 봇이 실행됩니다.  

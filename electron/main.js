@@ -10,6 +10,7 @@ let mainWindow = null
 let botProcess = null
 
 const defaultConfig = {
+  vcsProvider: 'gitlab',
   gitlabUrl: '',
   gitlabPrivateToken: '',
   githubToken: '',
@@ -297,6 +298,8 @@ ipcMain.handle('stopBot', () => {
   mainWindow?.webContents.send('bot-status', { running: false })
   return { ok: true }
 })
+
+ipcMain.handle('hasJar', () => !!getJarPath())
 
 ipcMain.handle('getWebhookUrl', () => {
   let config = defaultConfig

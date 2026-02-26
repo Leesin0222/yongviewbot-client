@@ -9,4 +9,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('bot-status', (_, status) => callback(status))
   },
   getWebhookUrl: () => ipcRenderer.invoke('getWebhookUrl'),
+  hasJar: () => ipcRenderer.invoke('hasJar'),
 })
