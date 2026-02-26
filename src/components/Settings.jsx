@@ -13,6 +13,10 @@ const defaultConfig = {
   webhookSecret: '',
   ollamaBaseUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.1:8b',
+  llmProvider: 'ollama',
+  llmApiKey: '',
+  llmModel: 'gpt-4o',
+  llmBaseUrl: 'https://api.openai.com/v1',
   reviewTriggerActions: 'open',
   serverPort: '8000',
   startServerOnLaunch: false,
@@ -327,11 +331,29 @@ export default function Settings() {
           <h2 id="settings-webhook-heading" className="ds-section-title">Webhook</h2>
           <TextInput id="webhook-secret" label="Webhook Secret (선택)" value={config.webhookSecret} onChange={(e) => setConfig((p) => ({ ...p, webhookSecret: e.target.value }))} />
         </section>
-        <section aria-labelledby="settings-ollama-heading">
-          <h2 id="settings-ollama-heading" className="ds-section-title">Ollama</h2>
+        <section aria-labelledby="settings-llm-heading">
+          <h2 id="settings-llm-heading" className="ds-section-title">LLM</h2>
           <div className="ds-flex ds-flex-col ds-gap-3">
-            <TextInput id="ollama-base-url" label="Ollama Base URL" value={config.ollamaBaseUrl} onChange={(e) => setConfig((p) => ({ ...p, ollamaBaseUrl: e.target.value }))} />
-            <TextInput id="ollama-model" label="Ollama Model" value={config.ollamaModel} onChange={(e) => setConfig((p) => ({ ...p, ollamaModel: e.target.value }))} placeholder="llama3.1:8b" />
+            <div>
+              <Label htmlFor="llm-provider">Provider</Label>
+              <Select id="llm-provider" value={config.llmProvider ?? 'ollama'} onChange={(e) => setConfig((p) => ({ ...p, llmProvider: e.target.value }))}>
+                <option value="ollama">Ollama (로컬)</option>
+                <option value="openai">OpenAI / 호환 API</option>
+              </Select>
+            </div>
+            {config.llmProvider === 'openai' && (
+              <>
+                <TextInput id="llm-api-key" label="API Key (상용 API 사용 시 과금될 수 있음)" type="password" value={config.llmApiKey ?? ''} onChange={(e) => setConfig((p) => ({ ...p, llmApiKey: e.target.value }))} placeholder="sk-..." />
+                <TextInput id="llm-model" label="Model" value={config.llmModel ?? 'gpt-4o'} onChange={(e) => setConfig((p) => ({ ...p, llmModel: e.target.value }))} placeholder="gpt-4o" />
+                <TextInput id="llm-base-url" label="Base URL (선택)" value={config.llmBaseUrl ?? 'https://api.openai.com/v1'} onChange={(e) => setConfig((p) => ({ ...p, llmBaseUrl: e.target.value }))} placeholder="https://api.openai.com/v1" />
+              </>
+            )}
+            {config.llmProvider !== 'openai' && (
+              <>
+                <TextInput id="ollama-base-url" label="Ollama Base URL" value={config.ollamaBaseUrl} onChange={(e) => setConfig((p) => ({ ...p, ollamaBaseUrl: e.target.value }))} />
+                <TextInput id="ollama-model" label="Ollama Model" value={config.ollamaModel} onChange={(e) => setConfig((p) => ({ ...p, ollamaModel: e.target.value }))} placeholder="llama3.1:8b" />
+              </>
+            )}
           </div>
         </section>
         <section aria-labelledby="settings-server-heading">
