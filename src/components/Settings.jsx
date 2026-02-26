@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Button, TextInput, Select, useToast } from './ui'
+import { Button, Label, TextInput, Select, useToast } from './ui'
 import Mascot from './Mascot'
 import TypingMessage from './TypingMessage'
 import './Settings.css'
@@ -9,11 +9,13 @@ const THEME_KEY = 'yongviewbot-theme'
 const defaultConfig = {
   gitlabUrl: '',
   gitlabPrivateToken: '',
+  githubToken: '',
   webhookSecret: '',
   ollamaBaseUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.1:8b',
   reviewTriggerActions: 'open',
   serverPort: '8000',
+  startServerOnLaunch: false,
 }
 
 const SETTINGS_STEPS = [
@@ -315,6 +317,12 @@ export default function Settings() {
             <TextInput id="gitlab-token" label="GitLab Private Token (필수)" required value={config.gitlabPrivateToken} onChange={(e) => setConfig((p) => ({ ...p, gitlabPrivateToken: e.target.value }))} placeholder="glpat-xxxxxxxx" />
           </div>
         </section>
+        <section aria-labelledby="settings-github-heading">
+          <h2 id="settings-github-heading" className="ds-section-title">GitHub (선택)</h2>
+          <div className="ds-flex ds-flex-col ds-gap-3">
+            <TextInput id="github-token" label="GitHub Token (PR 리뷰용, 선택)" value={config.githubToken ?? ''} onChange={(e) => setConfig((p) => ({ ...p, githubToken: e.target.value }))} placeholder="ghp_xxxxxxxx" />
+          </div>
+        </section>
         <section aria-labelledby="settings-webhook-heading">
           <h2 id="settings-webhook-heading" className="ds-section-title">Webhook</h2>
           <TextInput id="webhook-secret" label="Webhook Secret (선택)" value={config.webhookSecret} onChange={(e) => setConfig((p) => ({ ...p, webhookSecret: e.target.value }))} />
@@ -329,6 +337,16 @@ export default function Settings() {
         <section aria-labelledby="settings-server-heading">
           <h2 id="settings-server-heading" className="ds-section-title">서버</h2>
           <div className="ds-flex ds-flex-col ds-gap-3">
+            <div className="ds-flex ds-items-center ds-gap-2">
+              <input
+                type="checkbox"
+                id="start-server-on-launch"
+                checked={config.startServerOnLaunch === true}
+                onChange={(e) => setConfig((p) => ({ ...p, startServerOnLaunch: e.target.checked }))}
+                className="ds-checkbox"
+              />
+              <Label htmlFor="start-server-on-launch">앱 실행 시 서버 자동 실행</Label>
+            </div>
             <TextInput id="review-trigger-actions" label="리뷰 트리거 (MR 웹훅 action)" value={config.reviewTriggerActions} onChange={(e) => setConfig((p) => ({ ...p, reviewTriggerActions: e.target.value }))} placeholder="open 또는 open,update,reopen" />
             <TextInput id="server-port" label="Server Port" value={config.serverPort} onChange={(e) => setConfig((p) => ({ ...p, serverPort: e.target.value }))} />
           </div>

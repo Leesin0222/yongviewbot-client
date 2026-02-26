@@ -12,11 +12,13 @@ let botProcess = null
 const defaultConfig = {
   gitlabUrl: '',
   gitlabPrivateToken: '',
+  githubToken: '',
   webhookSecret: '',
   ollamaBaseUrl: 'http://localhost:11434',
   ollamaModel: 'llama3.1:8b',
   reviewTriggerActions: 'open',
   serverPort: '8000',
+  startServerOnLaunch: false,
 }
 
 function loadWindowState() {
@@ -63,6 +65,54 @@ function getLocalIp() {
     }
   }
   return '127.0.0.1'
+}
+
+function loadConfig() {
+  try {
+    const raw = fs.readFileSync(CONFIG_FILE, 'utf8')
+    return { ...defaultConfig, ...JSON.parse(raw) }
+  } catch {
+    return defaultConfig
+  }
+}
+
+function startBotInternal() {
+  if (!mainWindow || mainWindow.isDestroyed()) {
+    return { ok: false, error: 'window_not_ready' }
+  }
+  const jarPath = getJarPath()
+  if (!jarPath) {
+    mainWindow.webContents.send('bot-status', { running: false, error: 'jar_not_found' })
+    return { ok: false, error: 'jar_not_found' }
+  }
+  const config = loadConfig()
+  const env = {
+    ...process.env,
+    GITLAB_URL: config.gitlabUrl || '',
+    GITLAB_PRIVATE_TOKEN: config.gitlabPrivateToken || '',
+    GITHUB_TOKEN: config.githubToken || '',
+    WEBHOOK_SECRET: config.webhookSecret || '',
+    OLLAMA_BASE_URL: config.ollamaBaseUrl || 'http://localhost:11434',
+    OLLAMA_MODEL: config.ollamaModel || 'llama3.1:8b',
+    REVIEW_TRIGGER_ACTIONS: config.reviewTriggerActions ?? 'open',
+    SERVER_PORT: config.serverPort || '8000',
+  }
+  try {
+    botProcess = spawn('java', ['-jar', jarPath], { env })
+    botProcess.on('error', (err) => {
+      mainWindow?.webContents.send('bot-status', { running: false, error: err.message })
+    })
+    botProcess.on('exit', (code) => {
+      botProcess = null
+      mainWindow?.webContents.send('bot-status', { running: false, exitCode: code })
+    })
+    mainWindow.webContents.send('bot-status', { running: true })
+    return { ok: true }
+  } catch (err) {
+    botProcess = null
+    mainWindow.webContents.send('bot-status', { running: false, error: err.message })
+    return { ok: false, error: err.message }
+  }
 }
 
 function createApplicationMenu() {
@@ -194,6 +244,13 @@ app.whenReady().then(() => {
   createApplicationMenu()
   createWindow()
 
+  mainWindow.webContents.once('did-finish-load', () => {
+    const config = loadConfig()
+    if (config.startServerOnLaunch === true && getJarPath()) {
+      startBotInternal()
+    }
+  })
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
@@ -207,54 +264,22 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.handle('getConfig', () => {
-  try {
-    const raw = fs.readFileSync(CONFIG_FILE, 'utf8')
-    return { ...defaultConfig, ...JSON.parse(raw) }
-  } catch {
-    return defaultConfig
-  }
-})
+ipcMain.handle('getConfig', () => loadConfig())
 
 ipcMain.handle('saveConfig', (_, config) => {
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2), 'utf8')
+  if (botProcess) {
+    botProcess.kill()
+    botProcess = null
+    mainWindow?.webContents.send('bot-status', { running: false })
+    startBotInternal()
+  }
   return true
 })
 
 ipcMain.handle('startBot', () => {
   if (botProcess) return { ok: false, error: 'already_running' }
-  const jarPath = getJarPath()
-  if (!jarPath) return { ok: false, error: 'jar_not_found' }
-  const config = (() => {
-    try {
-      return { ...defaultConfig, ...JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8')) }
-    } catch { return defaultConfig }
-  })()
-  const env = {
-    ...process.env,
-    GITLAB_URL: config.gitlabUrl || '',
-    GITLAB_PRIVATE_TOKEN: config.gitlabPrivateToken || '',
-    WEBHOOK_SECRET: config.webhookSecret || '',
-    OLLAMA_BASE_URL: config.ollamaBaseUrl || 'http://localhost:11434',
-    OLLAMA_MODEL: config.ollamaModel || 'llama3.1:8b',
-    REVIEW_TRIGGER_ACTIONS: config.reviewTriggerActions ?? 'open',
-    SERVER_PORT: config.serverPort || '8000',
-  }
-  try {
-    botProcess = spawn('java', ['-jar', jarPath], { env })
-    botProcess.on('error', (err) => {
-      mainWindow?.webContents.send('bot-status', { running: false, error: err.message })
-    })
-    botProcess.on('exit', (code) => {
-      botProcess = null
-      mainWindow?.webContents.send('bot-status', { running: false, exitCode: code })
-    })
-    mainWindow?.webContents.send('bot-status', { running: true })
-    return { ok: true }
-  } catch (err) {
-    botProcess = null
-    return { ok: false, error: err.message }
-  }
+  return startBotInternal()
 })
 
 ipcMain.handle('stopBot', () => {
